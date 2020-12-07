@@ -6,9 +6,14 @@ resource "random_id" "name2" {
   byte_length = 2
 }
 
+resource "random_id" "name3" {
+  byte_length = 2
+}
+
 locals {
   ZONE1 = "${var.region}-1"
   ZONE2 = "${var.region}-2"
+  ZONE3 = "${var.region}-3"
 }
 
 resource "ibm_is_vpc" "vpc1" {
@@ -25,6 +30,12 @@ resource "ibm_is_public_gateway" "testacc_gateway2" {
     name = "public-gateway2"
     vpc = ibm_is_vpc.vpc1.id
     zone = local.ZONE2
+}
+
+resource "ibm_is_public_gateway" "testacc_gateway3" {
+    name = "public-gateway3"
+    vpc = ibm_is_vpc.vpc1.id
+    zone = local.ZONE3
 }
 
 resource "ibm_is_security_group_rule" "testacc_security_group_rule_tcp" {
@@ -52,6 +63,14 @@ resource "ibm_is_subnet" "subnet2" {
   public_gateway = ibm_is_public_gateway.testacc_gateway2.id
 }
 
+resource "ibm_is_subnet" "subnet3" {
+  name                     = "subnet-${random_id.name3.hex}"
+  vpc                      = ibm_is_vpc.vpc1.id
+  zone                     = local.ZONE3
+  total_ipv4_address_count = 256
+  public_gateway = ibm_is_public_gateway.testacc_gateway3.id
+}
+
 data "ibm_resource_group" "resource_group" {
   name = var.resource_group
 }
@@ -75,9 +94,9 @@ resource "ibm_container_vpc_cluster" "cluster" {
 
 }
 
-resource "ibm_container_vpc_worker_pool" "cluster_pool" {
+resource "ibm_container_vpc_worker_pool" "cluster_pool2" {
   cluster           = ibm_container_vpc_cluster.cluster.id
-  worker_pool_name  = "${var.worker_pool_name}${random_id.name1.hex}"
+  worker_pool_name  = "default2"
   flavor            = var.flavor
   vpc_id            = ibm_is_vpc.vpc1.id
   worker_count      = var.worker_count
@@ -86,5 +105,19 @@ resource "ibm_container_vpc_worker_pool" "cluster_pool" {
   zones {
     name      = local.ZONE2
     subnet_id = ibm_is_subnet.subnet2.id
+  }
+}
+
+resource "ibm_container_vpc_worker_pool" "cluster_pool3" {
+  cluster           = ibm_container_vpc_cluster.cluster.id
+  worker_pool_name  = "default3"
+  flavor            = var.flavor
+  vpc_id            = ibm_is_vpc.vpc1.id
+  worker_count      = var.worker_count
+  resource_group_id = data.ibm_resource_group.resource_group.id
+  entitlement       = var.entitlement
+  zones {
+    name      = local.ZONE3
+    subnet_id = ibm_is_subnet.subnet3.id
   }
 }
