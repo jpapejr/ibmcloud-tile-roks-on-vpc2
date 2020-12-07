@@ -10,8 +10,6 @@ variable "resource_group" {}
 
 variable "cluster_name" {}
 
-variable "worker_pool_name" {}
-
 variable "cos_instance_crn"{}
 
 variable "entitlement" {}
