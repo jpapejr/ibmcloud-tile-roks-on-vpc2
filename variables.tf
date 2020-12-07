@@ -34,10 +34,6 @@ variable "cluster_name" {
   default = "cluster-roks-on-vpc"
 }
 
-variable "worker_pool_name" {
-  default = "workerpool"
-}
-
 variable "entitlement"{
   default = ""
 }
