@@ -76,7 +76,7 @@ data "ibm_resource_group" "resource_group" {
 }
 
 resource "ibm_container_vpc_cluster" "cluster" {
-  name              = "${var.cluster_name}${random_id.name1.hex}"
+  name              = "${var.cluster_name}-${random_id.name1.hex}"
   vpc_id            = ibm_is_vpc.vpc1.id
   kube_version      = var.kube_version
   flavor            = var.flavor
