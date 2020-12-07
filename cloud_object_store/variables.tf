@@ -7,3 +7,9 @@ variable "service_offering" {
 
 variable "plan" {
 }
+
+variable "TF_VERSION" {
+  type = string
+  description = "The version of terraform that should be used"
+  default = "0.12"
+}

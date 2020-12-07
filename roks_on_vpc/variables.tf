@@ -13,3 +13,9 @@ variable "cluster_name" {}
 variable "cos_instance_crn"{}
 
 variable "entitlement" {}
+
+variable "TF_VERSION" {
+  type = string
+  description = "The version of terraform that should be used"
+  default = "0.12"
+}

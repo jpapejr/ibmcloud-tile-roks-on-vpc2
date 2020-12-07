@@ -40,6 +40,7 @@ variable "entitlement"{
 
 //Variable required for content catalog to select terraform version
 variable "TF_VERSION" {
-  default     = "0.12"
-  description = "terraform engine version to be used in schematics"
+  type = string
+  description = "The version of terraform that should be used"
+  default = "0.12"
 }
