@@ -106,7 +106,7 @@ resource "ibm_container_vpc_worker_pool" "cluster_pool2" {
   worker_pool_name  = "default2"
   flavor            = var.cluster_node_flavor
   vpc_id            = ibm_is_vpc.vpc1.id
-  worker_count      = var.default_worker_pool_count
+  worker_count      = var.worker_count
   resource_group_id = data.ibm_resource_group.resource_group.id
   entitlement       = var.entitlement
   zones {
