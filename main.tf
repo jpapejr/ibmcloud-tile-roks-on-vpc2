@@ -104,7 +104,7 @@ resource "ibm_container_vpc_cluster" "cluster" {
 resource "ibm_container_vpc_worker_pool" "cluster_pool2" {
   cluster           = ibm_container_vpc_cluster.cluster.id
   worker_pool_name  = "default2"
-  flavor            = var.flavor
+  flavor            = var.cluster_node_flavor
   vpc_id            = ibm_is_vpc.vpc1.id
   worker_count      = var.default_worker_pool_count
   resource_group_id = data.ibm_resource_group.resource_group.id
@@ -118,7 +118,7 @@ resource "ibm_container_vpc_worker_pool" "cluster_pool2" {
 resource "ibm_container_vpc_worker_pool" "cluster_pool3" {
   cluster           = ibm_container_vpc_cluster.cluster.id
   worker_pool_name  = "default3"
-  flavor            = var.flavor
+  flavor            = var.cluster_node_flavor
   vpc_id            = ibm_is_vpc.vpc1.id
   worker_count      = var.worker_count
   resource_group_id = data.ibm_resource_group.resource_group.id
