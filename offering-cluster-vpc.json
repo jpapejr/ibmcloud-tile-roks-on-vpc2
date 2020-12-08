@@ -4,10 +4,10 @@
   "offering_icon_url": "https://globalcatalog.cloud.ibm.com/api/v1/1082e7d2-5e2f-0a11-a3bc-f88a8e1931fc/artifacts/terraform.svg",
   "tags": [
     "terraform",
-    "dev_ops"
+    "containers"
   ],
   "rating": {},
-  "short_description": "Provisions a cluster in an IBM Cloud resource group with VPC networking. Supports provisioning IKS or OCP clusters",
+  "short_description": "Provisions a ROKS 4.x cluster in an IBM Cloud resource group with VPC networking.",
   "kinds": [
     {
       "format_kind": "terraform",
@@ -16,9 +16,9 @@
       "versions": [
         {
           "version": "v1.0.0",
-          "catalog_id": "#CATALOG_ID",
+          "catalog_id": "c9dfa620-513f-428a-8a7e-9d5bf8adc367",
           "repo_url": "https://github.com/jpapejr/ibmcloud-tile-roks-on-vpc2",
-          "tgz_url": "https://github.com/jpapejr/ibmcloud-tile-roks-on-vpc2/releases/download/v1.0.0/mzr-roks-cluster-vpc.tar.gz",
+          "tgz_url": "https://github.com/jpapejr/ibmcloud-tile-roks-on-vpc2/archive/v1.0.0.tar.gz",
           "configuration": [
             {
               "key": "ibmcloud_api_key",
@@ -38,7 +38,7 @@
             {
               "key": "cluster_node_flavor",
               "type": "string",
-              "default_value": "m3c.4x32",
+              "default_value": "bx2.16x64",
               "description": "The machine flavor that should be provisioned for each worker node",
               "options": [
                 {
@@ -134,11 +134,7 @@
                 {
                   "label": "OpenShift 4.3",
                   "value": "4.3_openshift"
-                },
-                {
-                  "label": "OpenShift 4.4",
-                  "value": "ocp44"
-                },
+                }
               ],
               "required": true,
               "hidden": false
@@ -187,6 +183,7 @@
             {
               "key": "resource_group",
               "type": "string",
+              "default_value": "cloudnativetoolkit",
               "description": "Existing resource group where the cluster will be provisioned",
               "required": true,
               "hidden": false
@@ -199,12 +196,13 @@
               "hidden": false
             },
             {
-              "key": "worker_pool_name",
+              "key": "TF_VERSION",
               "type": "string",
-              "description": "The name of the first worker pool",
-              "required": false,
+              "default_value": "0.12",
+              "description": "The version of terraform that should be used",
+              "required": true,
               "hidden": false
-            },
+            }
           ],
           "install": {
             "instructions": "N/A"
@@ -220,12 +218,12 @@
             }
           ],
           "deprecated": false,
-          "long_description": "A Terraform-drive convenience tile that makes provisioning a new VPC gen2-based ROKS 4.x cluster easier."
+          "long_description": "A Terraform-driven convenience tile that makes provisioning a new VPC gen2-based ROKS 4.x cluster easier."
         }
       ]
     }
   ],
-  "catalog_id": "#CATALOG_ID",
+  "catalog_id": "c9dfa620-513f-428a-8a7e-9d5bf8adc367",
   "hidden": false,
   "provider": "IBM",
   "repo_info": {
