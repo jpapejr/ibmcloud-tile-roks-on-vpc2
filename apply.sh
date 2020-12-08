@@ -7,4 +7,4 @@ cd "${SRC_DIR}"
 
 echo ""
 
-terraform init && terraform apply -var="TF_VERSION=0.12" -auto-approve
+terraform init && terraform apply -auto-approve

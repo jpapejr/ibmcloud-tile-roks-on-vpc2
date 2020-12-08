@@ -18,7 +18,7 @@ variable "cluster_kube_version" {
     default = "4.5_openshift"
 }
 
-variable "default_worker_pool_count"{
+variable "worker_count"{
     default = "2"
 }
 
